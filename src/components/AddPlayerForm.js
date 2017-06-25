@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class AddPlayerForm extends React.Component {
 
@@ -10,7 +11,7 @@ export default class AddPlayerForm extends React.Component {
       }
 
       this.onNameChange = this.onNameChange.bind(this);
-      this.onSubmit = this.onSubmit.bind(this);
+      this.addPlayer = this.addPlayer.bind(this);
   }
 
   onNameChange(e) {
@@ -18,16 +19,16 @@ export default class AddPlayerForm extends React.Component {
     this.setState({ name: name });
   };
 
-  onSubmit(e) {
+  addPlayer(e) {
     if (e) e.preventDefault();
-    this.props.onAdd(this.state.name);
+    this.props.addPlayer(this.state.name);
     this.setState({ name: '' });
   };
 
   render() {
     return (
       <div className="add-player-form">
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.addPlayer}>
           <input
             type="text"
             value={this.state.name}
@@ -40,3 +41,7 @@ export default class AddPlayerForm extends React.Component {
     );
   }
 };
+
+AddPlayerForm.propTypes = {
+    addPlayer: PropTypes.func.isRequired
+}
